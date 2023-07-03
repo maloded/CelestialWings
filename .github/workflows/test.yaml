@@ -1,0 +1,46 @@
+name: Testing CI
+
+on: 
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node:
+          - 16
+          - 18
+          - 19
+          - 20
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies (server)
+        run: npm ci
+        working-directory: server
+      - name: Run tests (server)
+        run: npm test
+        working-directory: server
+      - name: Install dependencies (app)
+        run: npm ci
+        working-directory: app
+      - name: Run tests (app)
+        run: npm test
+        working-directory: app
