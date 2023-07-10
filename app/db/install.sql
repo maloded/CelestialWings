@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS airline;
+DROP USER IF EXISTS airded;
+CREATE USER airded WITH PASSWORD 'airpass';
+CREATE DATABASE airline OWNER airded;

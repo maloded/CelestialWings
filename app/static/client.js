@@ -71,13 +71,12 @@ const scaffold = (url) => {
 };
 
 (async () => {
-  const api = await scaffold('ws://localhost:8001')({
-    aircrafts: {
-      all: [],
-      aircraft: ['id'],
+  const api = await scaffold('http://localhost:8001')({
+    aircraft: {
+      getAll: [],
+      get: ['id'],
     },
   });
-
-  const data = await api.aircrafts.aircraft(1);
+  const data = await api.aircraft.get(1);
   console.dir({ data });
 })();
