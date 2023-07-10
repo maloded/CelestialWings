@@ -4,6 +4,7 @@ let callId = 1;
 transport.http = (url) => (structure) => {
   const api = {};
   const services = Object.keys(structure);
+  // prettier-ignore
   const createAPIMethod = (name, methodName) => (...args) =>
     new Promise((resolve, reject) => {
       const id = callId++;
@@ -36,6 +37,7 @@ transport.ws = (url) => (structure) => {
   const socket = new WebSocket(url);
   const api = {};
   const services = Object.keys(structure);
+  // prettier-ignore
   const createAPIMethod = (name, methodName) => (...args) =>
     new Promise((resolve) => {
       const id = callId++;
