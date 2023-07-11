@@ -13,7 +13,7 @@ const { HttpTransport, WsTransport, MIME_TYPES, HEADERS } = transport;
 class Session {
   constructor(token, data) {
     this.token = token;
-    this.data = { ...data };
+    this.state = { ...data };
   }
 }
 
@@ -117,7 +117,7 @@ class Server {
 
   listen(port) {
     this.httpServer.on('request', async (req, res) => {
-      if (!req.url.startsWith('./api')) {
+      if (!req.url.startsWith('/api')) {
         this.staticHandler(req, res);
         return;
       }
@@ -170,7 +170,7 @@ class Server {
     }
     const context = client.createContext();
     /* TODO: check rights
-    if (!client.session && proc.ascces !== 'public') {
+    if (!client.session && proc.acccess !== 'public') {
       client.error(403, { id });
       return;
     }*/
@@ -192,3 +192,4 @@ class Server {
 }
 
 module.exports = { Server };
+

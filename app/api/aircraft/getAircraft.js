@@ -1,8 +1,6 @@
 ({
   access: 'public',
-  method: async ({ code }) => {
-    context.state = { pg: lib.db.connection };
-
+  method: async ( code ) => {
     try {
       const aircraft = await domain.aircraft.getAircraft(code);
       return { status: 'fulfilled', value: { aircraft } };
