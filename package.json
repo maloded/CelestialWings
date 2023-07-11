@@ -1,9 +1,10 @@
 {
-  "name": "server",
+  "name": "app",
   "version": "1.0.0",
-  "description": "Server of CelestialWings",
+  "description": "Application of CelestialWings",
   "main": "main.js",
   "scripts": {
+    "start": "npm ci && node main.js",
     "test": "npm run lint && tsc",
     "lint": "eslint . && prettier -c \"**/*.js\" \"**/*.ts\"",
     "fmt": "prettier --write \"**/*.js\" \"**/*.ts\""
@@ -25,8 +26,8 @@
     "node": "16 || 18 || 19 || 20"
   },
   "dependencies": {
-    "pg": "^8.11.1",
-    "ws": "^8.13.0"
+    "metasql": "^3.0.0-alpha.1",
+    "pg": "^8.11.1"
   },
   "devDependencies": {
     "@types/node": "^20.3.3",

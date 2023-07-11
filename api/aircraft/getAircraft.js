@@ -1,6 +1,7 @@
 ({
   access: 'public',
-  method: async ( code ) => {
+  method: async (code) => {
+    domain.start();
     try {
       const aircraft = await domain.aircraft.getAircraft(code);
       return { status: 'fulfilled', value: { aircraft } };

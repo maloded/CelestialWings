@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="client.js"></script>
+</head>
+
+<body>
+  <h1>Aircrafts</h1>
+  <ul id="aircraftList"></ul>
+  <div id="output"></div>
+
+  <script>
+    async function getAircraft(code) {
+      try {
+        const data = await window.api.aircraft.getAircraft(code);
+        const aircraftInfo = data.result.value.aircraft;
+        const output = document.getElementById('output');
+        output.textContent = `Code: ${aircraftInfo.code}; \nModel: ${aircraftInfo.model}; \nRange: ${aircraftInfo.range}`;
+        output.className = 'success';
+      } catch (error) {
+        console.error(error);
+        const output = document.getElementById('output');
+        output.textContent = 'Error occurred while fetching aircraft information.';
+        output.className = 'error';
+      }
+    }
+
+    async function populateAircraftList() {
+      try {
+        const aircrafts = await window.api.aircraft.getAllAircrafts();
+        const aircraftList = document.getElementById('aircraftList');
+        aircrafts.result.value.aircrafts.forEach((aircraft) => {
+          const listItem = document.createElement('li');
+          listItem.textContent = aircraft.code;
+          listItem.onclick = () => getAircraft(aircraft.code);
+          aircraftList.appendChild(listItem);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    populateAircraftList();
+  </script>
+</body>
+
+</html>

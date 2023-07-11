@@ -1,0 +1,43 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  color: #70ad47;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #f0f0f0;
+}
+
+li:hover {
+  background-color: #e0e0e0;
+}
+
+#output {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+#output.success {
+  background-color: #c8f3c0;
+  color: green;
+  font-family: "Courier New", monospace;
+}
+
+#output.error {
+  background-color: #f8c0c0;
+  color: red;
+  font-family: "Arial", sans-serif;
+}

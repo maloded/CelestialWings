@@ -32,15 +32,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Install dependencies (server)
+      - name: Install dependencies 
         run: npm ci
-        working-directory: server
-      - name: Run tests (server)
+      - name: Run tests
         run: npm test
-        working-directory: server
-      - name: Install dependencies (app)
-        run: npm ci
-        working-directory: app
-      - name: Run tests (app)
-        run: npm test
-        working-directory: app

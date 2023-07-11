@@ -65,8 +65,11 @@ const scaffold = (url) => {
   const api = await scaffold('http://localhost:8003')({
     aircraft: {
       getAircraft: ['code'],
+      getAllAircrafts: [],
     },
   });
-  const data = await api.aircraft.getAircraft('AN-24');
-  console.dir({ data });
+  window.api = api;
+  const data1 = await api.aircraft.getAircraft('AN-30');
+  const data2 = await api.aircraft.getAllAircrafts();
+  console.dir({ data1, data2 });
 })();
