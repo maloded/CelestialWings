@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "metasql": "^3.0.0-alpha.1",
-    "pg": "^8.11.1"
+    "pg": "^8.11.1",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.3.3",

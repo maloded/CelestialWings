@@ -1,28 +1,27 @@
-const fsp = require('node:fs').promises;
+const fs = require('node:fs');
 const path = require('node:path');
 const pg = require('pg');
 const metasql = require('metasql');
 
-const POSTGRES = {
-  host: '127.0.0.1',
+const APPLICATION = {
+  host: 'dpg-cin9i6p8g3nafl4a2drg-a.oregon-postgres.render.com',
   port: 5432,
-  database: 'postgres',
-  user: 'postgres',
-  password: 'deded',
+  database: 'airline_yz6q',
+  user: 'airded',
+  password: 'iaPpCGpzxsCSqRcCWkTzv17Pb23ex0ip',
+  ssl: {
+    rejectUnauthorized: false,
+    cert: fs.readFileSync(path.resolve(__dirname, '../certificate.crt')),
+    key: fs.readFileSync(path.resolve(__dirname, '../private.key')),
+  },
 };
 
-const APPLICATION = {
-  host: '127.0.0.1',
-  port: 5432,
-  database: 'airline',
-  user: 'airded',
-  password: 'airpass',
-};
+console.log(path.resolve(__dirname, '../certificate.crt'))
 
 const DB = path.join(process.cwd(), './db');
 const SCHEMAS = path.join(process.cwd(), './schemas');
 
-const read = (name) => fsp.readFile(path.join(DB, name), 'utf8');
+const read = (name) => fs.promises.readFile(path.join(DB, name), 'utf8');
 
 const execute = async (client, sql) => {
   try {
@@ -48,21 +47,16 @@ const executeFile = async (client, name) => {
   await metasql.create(SCHEMAS, DB);
   const databaseFile = path.join(DB, 'database.sql');
   const structureFile = path.join(DB, 'structure.sql');
-  await fsp.rename(databaseFile, structureFile);
+  await fs.promises.rename(databaseFile, structureFile);
   console.log('Generate typings domain.d.ts');
   const typesFile = path.join(DB, 'database.d.ts');
   const domainTypes = path.join(DB, 'domain.d.ts');
-  await fsp.rename(typesFile, domainTypes);
-
-  const inst = new pg.Client(POSTGRES);
-  await inst.connect();
-  await executeFile(inst, 'install.sql');
-  await inst.end();
+  await fs.promises.rename(typesFile, domainTypes);
 
   const db = new pg.Client(APPLICATION);
   await db.connect();
-  await executeFile(db, 'structure.sql');
-  await executeFile(db, 'data.sql');
+  // await executeFile(db, 'structure.sql');
+  // await executeFile(db, 'data.sql');
   await db.end();
 
   console.log('Environment is ready');
