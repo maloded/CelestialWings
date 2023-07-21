@@ -1,0 +1,3 @@
+[submodule "static/CelestialWingsUI"]
+	path = static/CelestialWingsUI
+	url = git@github.com:maloded/CelestialWingsUI.git
