@@ -14,7 +14,7 @@ transport.http = (url) => (structure) => {
         new Promise((resolve, reject) => {
           const id = callId++;
           const entries = structure[name][methodName].map((key, index) => {
-            return [key, values[index]]
+            return [key, values[index]];
           });
           const args = Object.fromEntries(entries);
           const method = name + '/' + methodName;
@@ -46,7 +46,7 @@ transport.ws = (url) => (structure) => {
         new Promise((resolve) => {
           const id = callId++;
           const entries = structure[name][methodName].map((key, index) => {
-            return [key, values[index]]
+            return [key, values[index]];
           });
           const args = Object.fromEntries(entries);
           const method = name + '/' + methodName;

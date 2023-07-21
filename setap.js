@@ -16,8 +16,6 @@ const APPLICATION = {
   },
 };
 
-console.log(path.resolve(__dirname, '../certificate.crt'))
-
 const DB = path.join(process.cwd(), './db');
 const SCHEMAS = path.join(process.cwd(), './schemas');
 
@@ -55,8 +53,8 @@ const executeFile = async (client, name) => {
 
   const db = new pg.Client(APPLICATION);
   await db.connect();
-  // await executeFile(db, 'structure.sql');
-  // await executeFile(db, 'data.sql');
+  await executeFile(db, 'structure.sql');
+  await executeFile(db, 'data.sql');
   await db.end();
 
   console.log('Environment is ready');
